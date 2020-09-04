@@ -8,4 +8,4 @@ class MyStuff extends React.Component {
   }
 }
 
-export default { MyStuff };
+export default MyStuff;
