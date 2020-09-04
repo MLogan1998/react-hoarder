@@ -1,30 +1,20 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { NavLink, NavItem } from 'reactstrap';
-
-import './Auth.scss';
 
 class Auth extends React.Component {
-  signOut = (e) => {
+  loginClickEvent = (e) => {
     e.preventDefault();
-    firebase.auth().signOut();
-  }
-
-  signIn = (e) => {
-    e.preventDefault();
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleProvider);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider);
   }
 
   render() {
-    const { authed } = this.props;
     return (
-      <NavItem>
-        {
-          authed ? (<NavLink className="inOrOut ml-0" onClick={this.signOut}>Sign Out</NavLink>) : (<NavLink className="inOrOut ml-0" onClick={this.signIn}>Sign In</NavLink>)
-        }
-      </NavItem>
+      <div className="Auth">
+        <h1>Auth</h1>
+        <button className="btn btn-info" onClick={this.loginClickEvent}>Google Login</button>
+      </div>
     );
   }
 }

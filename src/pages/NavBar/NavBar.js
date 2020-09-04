@@ -11,10 +11,8 @@ import {
 
 import PropTypes from 'prop-types';
 import { NavLink as RRNavLink } from 'react-router-dom';
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
-
-import Auth from '../Auth/Auth';
 
 import './NavBar.scss';
 
@@ -27,6 +25,17 @@ class NavBar extends React.Component {
     authed: PropTypes.bool,
   }
 
+  signOut = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut();
+  }
+
+  signIn = (e) => {
+    e.preventDefault();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider);
+  }
+
   toggle = () => {
     const { isOpen } = this.state;
     this.setState({ isOpen: !isOpen });
@@ -35,6 +44,32 @@ class NavBar extends React.Component {
   render() {
     const { isOpen } = this.state;
     const { authed } = this.props;
+    const buildNav = () => {
+      if (authed) {
+        return (
+          <Nav className="mr-auto" navbar>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/new'>New</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} to='/mystuff'>My Stuff</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink onClick={this.signOut}>Log Me Out</NavLink>
+          </NavItem>
+        </Nav>
+        );
+      }
+      return <Nav className="ml-auto" navbar>
+               <NavItem>
+                 <NavLink onClick={this.signIn}>Log Me In</NavLink>
+               </NavItem>
+             </Nav>;
+    };
+
     return (
       <div>
       <Navbar color="light" light expand="md">
@@ -42,13 +77,7 @@ class NavBar extends React.Component {
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink tag={RRNavLink} to='/new'>Items</NavLink>
-          </NavItem>
-            < Auth authed={authed}/>
+          {buildNav()}
         </Nav>
         </Collapse>
       </Navbar>
