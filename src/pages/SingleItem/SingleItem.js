@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import stuffData from '../../helpers/data/stuffData';
 
 import './SingleItem.scss';
@@ -28,6 +30,8 @@ class SingleItem extends React.Component {
 
   render() {
     const { item } = this.state;
+    const { itemId } = this.props.match.params;
+    const editLink = `/edit/${itemId}`;
 
     return (
       <div className="single-wrapper">
@@ -36,6 +40,7 @@ class SingleItem extends React.Component {
         <div>
           <p className="single-description">{item.itemDescription}</p>
           <i className="fas fa-trash-alt fa-2x single-trash" onClick={this.deleteItem}></i>
+          <Link to={editLink}><i className="fas fa-edit fa-2x single-trash ml-3"></i></Link>
         </div>
       </div>
     );
