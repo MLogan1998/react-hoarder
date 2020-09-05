@@ -3,7 +3,7 @@ import React from 'react';
 class New extends React.Component {
   render() {
     return (
-      <h1>New</h1>
+      <h1 className="text-center">New</h1>
     );
   }
 }
