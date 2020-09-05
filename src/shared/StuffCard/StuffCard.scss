@@ -12,6 +12,11 @@ h5 {
 }
 
 .fa-info-circle, .fa-edit {
+  color: seagreen;
+  cursor: pointer;
+}
+
+.fa-trash-alt {
   color: red;
   cursor: pointer;
 }
