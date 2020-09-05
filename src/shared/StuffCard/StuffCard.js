@@ -21,6 +21,8 @@ class StuffCard extends React.Component {
   render() {
     const { item } = this.props;
     const singleLink = `/mystuff/${item.id}`;
+    const editLink = `/edit/${item.id}`;
+
     return (
       <div className="card">
         <div className="card-body">
@@ -30,7 +32,7 @@ class StuffCard extends React.Component {
         </div>
         <div className="card-footer">
           <Link to={singleLink}><i className="fas fa-info-circle"></i></Link>
-          <i className="fas fa-edit"></i>
+          <Link to={editLink}><i className="fas fa-edit"></i></Link>
           <i className="fas fa-trash-alt" onClick={this.deleteItemEvent}></i>
         </div>
       </div>
