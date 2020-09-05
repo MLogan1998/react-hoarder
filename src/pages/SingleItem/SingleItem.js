@@ -15,6 +15,17 @@ class SingleItem extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  deleteItem = (e) => {
+    e.preventDefault();
+    const { itemId } = this.props.match.params;
+
+    stuffData.deleteItem(itemId)
+      .then(() => {
+        this.props.history.push('/mystuff');
+      })
+      .catch((err) => console.error(err));
+  }
+
   render() {
     const { item } = this.state;
 
@@ -24,6 +35,7 @@ class SingleItem extends React.Component {
         <img className="single-img" src={item.itemImage} alt={item.itemName}></img>
         <div>
           <p className="single-description">{item.itemDescription}</p>
+          <i className="fas fa-trash-alt fa-2x single-trash" onClick={this.deleteItem}></i>
         </div>
       </div>
     );
