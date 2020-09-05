@@ -15,6 +15,7 @@ import NavBar from '../pages/NavBar/NavBar';
 import Home from '../pages/Home/Home';
 import New from '../pages/New/New';
 import MyStuff from '../pages/MyStuff/MyStuff';
+import SingleItem from '../pages/SingleItem/SingleItem';
 
 import './App.scss';
 
@@ -36,7 +37,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 
 class App extends React.Component {
   state ={
-    authed: true,
+    authed: false,
   }
 
   componentDidMount() {
@@ -60,8 +61,9 @@ class App extends React.Component {
         <BrowserRouter>
           <React.Fragment>
             <NavBar authed={authed} />
-            <div className="container">
+            <div>
               <Switch>
+                <PrivateRoute path="/mystuff/:itemId" component={SingleItem} authed={authed} />
                 <PrivateRoute path="/home" component={Home} authed={authed} />
                 <PrivateRoute path="/new" component={New} authed={authed} />
                 <PrivateRoute path="/mystuff" component={MyStuff} authed={authed} />
