@@ -31,7 +31,7 @@ class StuffCard extends React.Component {
         <div className="card-footer">
           <Link to={singleLink}><i className="fas fa-info-circle"></i></Link>
           <i className="fas fa-edit"></i>
-          <i class="fas fa-trash-alt" onClick={this.deleteItemEvent}></i>
+          <i className="fas fa-trash-alt" onClick={this.deleteItemEvent}></i>
         </div>
       </div>
     );
