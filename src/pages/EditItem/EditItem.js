@@ -18,7 +18,6 @@ class EditItem extends React.Component {
     stuffData.getItemById(itemId)
       .then((res) => {
         this.setState({ itemImage: res.data.itemImage, itemName: res.data.itemName, itemDescription: res.data.itemDescription });
-        console.error(res.data.itemImage);
       })
       .catch((err) => console.error(err));
   }
